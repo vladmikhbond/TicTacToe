@@ -63,12 +63,11 @@ View.prototype.drawWin = function (win, fi, centers)
 }
 
 
-
-
 View.prototype.clearCanvas = function ()
 {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 }
+
 
 View.prototype.show = function (win) {
     var centers = [];
@@ -79,8 +78,8 @@ View.prototype.show = function (win) {
     if (timer) clearInterval(timer);
     var timer = setInterval(function () {
         me.drawWin(win, fi, centers);
-        fi += 0.1;
-    }, 100);
+        fi += 0.2;
+    }, 10);
 
     
 }
