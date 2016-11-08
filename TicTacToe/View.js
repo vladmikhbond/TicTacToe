@@ -86,5 +86,4 @@ View.prototype.show = function (win) {
         }
     }, 50);
 
-    
 }
