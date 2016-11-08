@@ -1,5 +1,5 @@
 
-#sketchpadapp {
+#panel {
 /* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
     -webkit-touch-callout: none;
     -webkit-user-select: none;

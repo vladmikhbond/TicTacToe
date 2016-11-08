@@ -13,7 +13,6 @@ function Controller(canvas, model, view) {
     canvas.addEventListener('touchend', sketchpad_mouseUp, false);
 
 
-
     function getMousePos(e) {
         if (!e)
             var e = event;
@@ -96,8 +95,8 @@ function Controller(canvas, model, view) {
             var w = model.whoWin();          
             view.drawWin(w);
             if (w.length == 3) {
-                canvas.removeEventListener('mousedown', sketchpad_mouseDown, false);
-                canvas.removeEventListener('touchstart', sketchpad_touchStart, false);
+                //canvas.removeEventListener('mousedown', sketchpad_mouseDown, false);
+                //canvas.removeEventListener('touchstart', sketchpad_touchStart, false);
                 view.show(w);
             }
         }

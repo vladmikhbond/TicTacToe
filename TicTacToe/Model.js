@@ -19,9 +19,13 @@ Model.prototype.addTrace = function(trace)
 {
     trace.model = this;
     if (trace.size() > this.size / 2) {
+        // new game
+        if (trace.points.length > 200)
+            location.reload();
+        // grid line
         this.store[9].push(trace);
-        return true;
     }
+
     // define row and column
     var c = trace.center();
     var col = c.x / this.size * 3 | 0;
@@ -50,6 +54,8 @@ Model.prototype.addTrace = function(trace)
  
 }
 
+// returns 3 indexes
+// returns [] if no winner yet
 Model.prototype.whoWin = function() 
 {
     var f = this.field;

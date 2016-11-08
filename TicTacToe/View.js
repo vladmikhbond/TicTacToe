@@ -4,6 +4,7 @@ function View(model, canvas)
 {
     this.model = model;
     this.canvas = canvas;
+
     this.ctx = canvas.getContext('2d');
     this.ctx.strokeStyle = "black";
     this.ctx.lineWidth = model.size/50;
@@ -44,7 +45,7 @@ View.prototype.drawWin = function (win, fi, centers)
                 ctx.translate(-c.x, -c.y);
             }
             ctx.strokeStyle = "red";
-            ctx.lineWidth = this.model.size / 30;
+            ctx.lineWidth = this.model.size / 50;
         }
 
         for (var j in this.model.store[i]) {
@@ -76,10 +77,14 @@ View.prototype.show = function (win) {
 
     var fi = 0, timer, me = this;
     if (timer) clearInterval(timer);
-    var timer = setInterval(function () {
+    timer = setInterval(function () {
         me.drawWin(win, fi, centers);
-        fi += 0.2;
-    }, 10);
+        fi += 0.4;
+        if (fi > 20) {
+            clearInterval(timer);
+            location.reload();
+        }
+    }, 50);
 
     
 }
