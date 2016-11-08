@@ -95,6 +95,10 @@ function Controller(canvas, model, view) {
             model.addTrace(trace);
             var w = model.whoWin();          
             view.drawWin(w);
+            if (w.length == 3) {
+                canvas.removeEventListener('mousedown', sketchpad_mouseDown, false);
+                canvas.removeEventListener('touchstart', sketchpad_touchStart, false);
+            }
         }
         mouseDown = 0;
     }
