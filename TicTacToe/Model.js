@@ -59,8 +59,25 @@ Model.prototype.whoWin = function()
 
     for (var i = 0; i < 8; i++) {
         var a = m[i][0], b = m[i][1], c = m[i][2];
-        if (f[a] == f[b] && f[b] == f[c] && (f[c] == 'O' || f[c] == 'X'))
+        if (f[a] == f[b] && f[b] == f[c] && (f[c] == 'O' || f[c] == 'X')) 
             return m[i];
     }
     return [];
+}
+
+Model.prototype.cellCenter = function (idx) {
+    var c = { x: 0, y: 0 }, n = 0;
+    for (var j in this.store[idx])
+    {
+        var trace = this.store[idx][j];
+        for (var i in trace.points)
+        {
+            c.x += trace.points[i].x;
+            c.y += trace.points[i].y;
+        }
+        n += trace.points.length;
+    }
+    c.x /= n;
+    c.y /= n;
+    return c;
 }

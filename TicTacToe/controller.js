@@ -98,20 +98,11 @@ function Controller(canvas, model, view) {
             if (w.length == 3) {
                 canvas.removeEventListener('mousedown', sketchpad_mouseDown, false);
                 canvas.removeEventListener('touchstart', sketchpad_touchStart, false);
+                view.show(w);
             }
         }
         mouseDown = 0;
     }
-
-    //function sketchpad_touchEnd() {
-    //    if (mouseDown) {
-    //        model.addTrace(trace);
-    //        var w = model.whoWin();
-    //        if (w)
-    //            view.drawWin(w);
-    //    }
-    //    mouseDown = 0;
-    //}
 
 }
 
