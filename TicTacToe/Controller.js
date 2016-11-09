@@ -1,4 +1,4 @@
-function Controller(canvas, model, view) {
+function Controller() {
     var mousePos, mouseDown = 0, lastPos = null;
     var trace;
 
@@ -91,13 +91,17 @@ function Controller(canvas, model, view) {
 
     function sketchpad_mouseUp() {
         if (mouseDown) {
-            model.addTrace(trace);
-            var w = model.whoWin();          
-            view.drawWin(w);
-            if (w.length == 3) {
-                //canvas.removeEventListener('mousedown', sketchpad_mouseDown, false);
-                //canvas.removeEventListener('touchstart', sketchpad_touchStart, false);
-                view.dance(w);
+            // new game
+            if (trace.len() > model.size * 2) {
+                refresh();
+            }
+            else {
+                model.addTrace(trace);
+                var w = model.whoWin();          
+                view.drawWin(w);
+                if (w.length == 3) {
+                    view.dance(w);
+                }
             }
         }
         mouseDown = 0;

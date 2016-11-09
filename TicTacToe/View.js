@@ -1,22 +1,17 @@
 
 
-function View(model, canvas)
+function View()
 {
-    this.model = model;
-    this.canvas = canvas;
-
-    this.ctx = canvas.getContext('2d');
-    this.ctx.strokeStyle = "black";
-    this.ctx.lineWidth = model.size/50;
-    this.ctx.lineCap = "round";
-    this.ctx.lineJoin = "round";
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = model.size/50;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
     this.clearCanvas();
 }
 
 
 View.prototype.drawLine = function (p1, p2)
 {
-    var ctx = this.ctx;
     ctx.beginPath();
     ctx.moveTo(p1.x, p1.y);
     ctx.lineTo(p2.x, p2.y);
@@ -27,7 +22,6 @@ View.prototype.drawLine = function (p1, p2)
 
 View.prototype.drawWin = function (win, fi, centers)
 {
-    var ctx = this.ctx;
     this.clearCanvas();
     for (var i = 0; i < 10; i++) 
     {
@@ -35,7 +29,7 @@ View.prototype.drawWin = function (win, fi, centers)
         var idx = win.indexOf(i);
         if ( idx == -1) {
             ctx.strokeStyle = "black";
-            ctx.lineWidth = this.model.size / 50;
+            ctx.lineWidth = model.size / 50;
         } else {
             // rotation
             if (fi) {
@@ -45,11 +39,11 @@ View.prototype.drawWin = function (win, fi, centers)
                 ctx.translate(-c.x, -c.y);
             }
             ctx.strokeStyle = "red";
-            ctx.lineWidth = this.model.size / 50;
+            ctx.lineWidth = model.size / 50;
         }
 
-        for (var j in this.model.store[i]) {
-            var track = this.model.store[i][j];
+        for (var j in model.store[i]) {
+            var track = model.store[i][j];
             ctx.beginPath();
             var p = track.points[0]
             ctx.moveTo(p.x, p.y);
@@ -66,7 +60,7 @@ View.prototype.drawWin = function (win, fi, centers)
 
 View.prototype.clearCanvas = function ()
 {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 
@@ -76,7 +70,7 @@ View.prototype.dance = function (win) {
     setTimeout(function () {
         var centers = [];
         for (var i = 0; i < win.length; i++)
-            centers[win[i]] = me.model.cellCenter(win[i]);
+            centers[win[i]] = model.cellCenter(win[i]);
 
         var fi = 0, timer;
         // dance
@@ -86,7 +80,7 @@ View.prototype.dance = function (win) {
             if (fi > 30) {
                 clearInterval(timer);
                 // 1 sec after dance
-                setTimeout(function () { location.reload() }, 1000);
+                setTimeout(refresh, 1000);
             }
         }, 50);
     }, 1000);
