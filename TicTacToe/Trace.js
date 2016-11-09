@@ -18,6 +18,13 @@ Trace.prototype.center = function () {
     return c;
 }
 
+Trace.prototype.len = function () {
+    var sum = 0;
+    for (var i = 1; i < this.points.length; i++)
+        sum += dist(this.points[i - 1], this.points[i]);
+    return sum;
+}
+
 Trace.prototype.size = function () {
     var minX = maxX = this.points[0].x;
     var minY = maxY = this.points[0].y;

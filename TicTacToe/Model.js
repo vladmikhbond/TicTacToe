@@ -18,12 +18,14 @@ Model.prototype.count = function (char) {
 Model.prototype.addTrace = function(trace)
 {
     trace.model = this;
+
     if (trace.size() > this.size / 2) {
         // new game
-        if (trace.points.length > 200)
+        if (trace.len() > this.size * 3)
             location.reload();
         // grid line
         this.store[9].push(trace);
+        return;
     }
 
     // define row and column
