@@ -70,20 +70,25 @@ View.prototype.clearCanvas = function ()
 }
 
 
-View.prototype.show = function (win) {
-    var centers = [];
-    for (var i = 0; i < win.length; i++)
-        centers[win[i]] = this.model.cellCenter(win[i]);
+View.prototype.dance = function (win) {
+    var me = this;
+    // 1 sec before dance
+    setTimeout(function () {
+        var centers = [];
+        for (var i = 0; i < win.length; i++)
+            centers[win[i]] = me.model.cellCenter(win[i]);
 
-    var fi = 0, timer, me = this;
-    if (timer) clearInterval(timer);
-    timer = setInterval(function () {
-        me.drawWin(win, fi, centers);
-        fi += 0.4;
-        if (fi > 20) {
-            clearInterval(timer);
-            location.reload();
-        }
-    }, 50);
+        var fi = 0, timer;
+        // dance
+        timer = setInterval(function () {
+            me.drawWin(win, fi, centers);
+            fi += Math.PI / 10;
+            if (fi > 30) {
+                clearInterval(timer);
+                // 1 sec after dance
+                setTimeout(function () { location.reload() }, 1000);
+            }
+        }, 50);
+    }, 1000);
 
 }

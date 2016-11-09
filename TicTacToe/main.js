@@ -1,9 +1,4 @@
-document.getElementById("newGame").onclick = init;
-
-window.onload = init;
-
-
-function init ()
+window.onload = function()
 {
     var model = new Model(Math.min(window.innerWidth, window.innerHeight));
     var canvas = document.getElementById('sketchpad');

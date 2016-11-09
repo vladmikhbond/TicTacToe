@@ -97,7 +97,7 @@ function Controller(canvas, model, view) {
             if (w.length == 3) {
                 //canvas.removeEventListener('mousedown', sketchpad_mouseDown, false);
                 //canvas.removeEventListener('touchstart', sketchpad_touchStart, false);
-                view.show(w);
+                view.dance(w);
             }
         }
         mouseDown = 0;
