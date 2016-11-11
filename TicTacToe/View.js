@@ -72,17 +72,31 @@ View.prototype.dance = function (win) {
         for (var i = 0; i < win.length; i++)
             centers[win[i]] = model.cellCenter(win[i]);
 
-        var fi = 0, timer;
+
+        var fi = 0, fimax = 100;
+        var timer;
+
+        var audio = new Audio('waltz-of-flowers.wav');
+        audio.onended = function (e) {
+            clearInterval(timer);
+            // 1 sec after dance
+            setTimeout(refresh, 1000);
+        };
+        audio.onerror = function (e) { fimax = 20;  }
+        audio.play();
+
         // dance
         timer = setInterval(function () {
             me.drawWin(win, fi, centers);
             fi += Math.PI / 10;
-            if (fi > 30) {
+            if (fi > fimax) {
                 clearInterval(timer);
                 // 1 sec after dance
                 setTimeout(refresh, 1000);
             }
         }, 50);
+
+
     }, 1000);
 
 }
