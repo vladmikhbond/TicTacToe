@@ -1,17 +1,35 @@
-function Controller() {
+
+function Controller()
+{
     var mousePos, mouseDown = 0, lastPos = null;
     var trace;
 
-    // React to mouse events on the canvas, and mouseup on the entire document
-    canvas.addEventListener('mousedown', sketchpad_mouseDown, false);
-    canvas.addEventListener('mousemove', sketchpad_mouseMove, false);
-    window.addEventListener('mouseup', sketchpad_mouseUp, false);
+    this.addListeners = function () {
+        // React to mouse events on the canvas, and mouseup on the entire document
+        canvas.addEventListener('mousedown', sketchpad_mouseDown, false);
+        canvas.addEventListener('mousemove', sketchpad_mouseMove, false);
+        window.addEventListener('mouseup', sketchpad_mouseUp, false);
 
-    // React to touch events on the canvas
-    canvas.addEventListener('touchstart', sketchpad_touchStart, false);
-    canvas.addEventListener('touchmove', sketchpad_touchMove, false);
-    canvas.addEventListener('touchend', sketchpad_mouseUp, false);
+        // React to touch events on the canvas
+        canvas.addEventListener('touchstart', sketchpad_touchStart, false);
+        canvas.addEventListener('touchmove', sketchpad_touchMove, false);
+        canvas.addEventListener('touchend', sketchpad_mouseUp, false);
+    }
 
+    this.addListeners();
+
+
+    function removeListeners() {
+        // React to mouse events on the canvas, and mouseup on the entire document
+        canvas.removeEventListener('mousedown', sketchpad_mouseDown, false);
+        canvas.removeEventListener('mousemove', sketchpad_mouseMove, false);
+        window.removeEventListener('mouseup', sketchpad_mouseUp, false);
+
+        // React to touch events on the canvas
+        canvas.removeEventListener('touchstart', sketchpad_touchStart, false);
+        canvas.removeEventListener('touchmove', sketchpad_touchMove, false);
+        canvas.removeEventListener('touchend', sketchpad_mouseUp, false);
+    }
 
     function getMousePos(e) {
         if (!e)
@@ -91,6 +109,7 @@ function Controller() {
 
     function sketchpad_mouseUp() {
         if (mouseDown) {
+            mouseDown = 0;
             // new game
             if (trace.len() > model.size * 2) {
                 refresh();
@@ -100,16 +119,12 @@ function Controller() {
                 var w = model.whoWin();          
                 view.drawWin(w);
                 if (w.length == 3) {
+                    removeListeners();
                     view.dance(w);
                 }
             }
         }
-        mouseDown = 0;
     }
 
 }
-
-
-
-
 

@@ -1,7 +1,5 @@
-var model;
-var canvas
-var ctx;
-var view;
+var model, view, controller;
+var canvas, ctx;
 
 window.onload = function()
 {
@@ -10,10 +8,11 @@ window.onload = function()
     canvas.width = canvas.height = model.size;
     ctx = canvas.getContext('2d');
     view = new View();
-    new Controller();
+    controller = new Controller();
 }
 
 function refresh() {
     model = new Model(model.size);
     view.clearCanvas();
+    controller.addListeners();
 }

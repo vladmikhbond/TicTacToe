@@ -64,39 +64,37 @@ View.prototype.clearCanvas = function ()
 }
 
 
-View.prototype.dance = function (win) {
-    var me = this;
-    // 1 sec before dance
-    setTimeout(function () {
+View.prototype.dance = function (win) 
+{
+    // dance at 1 sec after win    
+    setTimeout(dance, 1000, this);
+
+    function dance(me) {
+        // geometry centers
         var centers = [];
         for (var i = 0; i < win.length; i++)
             centers[win[i]] = model.cellCenter(win[i]);
 
-
-        var fi = 0, fimax = 100;
+        var fi = 0, dfi = Math.PI / 10;
         var timer;
-
-        var audio = new Audio('waltz-of-flowers.wav');
-        audio.onended = function (e) {
+        //  select and play music
+        var music = ["engine115.mp3", "happy-jack-arp.wav", "level-win.wav", "waltz-of-flowers.wav", ];
+        var i = Math.random() * music.length | 0;
+        var audio = new Audio('music/' + music[i]);
+        audio.onended = function () {
             clearInterval(timer);
-            // 1 sec after dance
             setTimeout(refresh, 1000);
         };
-        audio.onerror = function (e) { fimax = 20;  }
         audio.play();
 
         // dance
         timer = setInterval(function () {
             me.drawWin(win, fi, centers);
-            fi += Math.PI / 10;
-            if (fi > fimax) {
-                clearInterval(timer);
-                // 1 sec after dance
-                setTimeout(refresh, 1000);
-            }
+            fi += dfi;
         }, 50);
 
+    }
 
-    }, 1000);
+
 
 }
