@@ -78,7 +78,7 @@ View.prototype.dance = function (win)
         var fi = 0, dfi = Math.PI / 10;
         var timer;
         //  select and play music
-        var music = ["engine115.mp3", "happy-jack-arp.wav", "level-win.wav", "waltz-of-flowers.wav", ];
+        var music = ["JINGLEBE.mp3", "happy-jack-arp.mp3", "level-win.mp3", "waltz-of-flowers.mp3", ];
         var i = Math.random() * music.length | 0;
         var audio = new Audio('music/' + music[i]);
         audio.onended = function () {
