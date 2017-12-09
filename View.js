@@ -1,5 +1,3 @@
-
-
 function View()
 {
     ctx.strokeStyle = "black";
@@ -69,7 +67,7 @@ View.prototype.dance = function (win)
     // dance at 1 sec after win    
     setTimeout(dance, 1000, this);
 
-    function dance(me) {
+    function dance(view) {
         // geometry centers
         var centers = [];
         for (var i = 0; i < win.length; i++)
@@ -77,10 +75,8 @@ View.prototype.dance = function (win)
 
         var fi = 0, dfi = Math.PI / 10;
         var timer;
-        //  select and play music
-        var music = ["JINGLEBE.mp3", "happy-jack-arp.mp3", "level-win.mp3", "waltz-of-flowers.mp3", ];
-        var i = Math.random() * music.length | 0;
-        var audio = new Audio('music/' + music[i]);
+        //  play music
+        var audio = win.who == 'X' ? audioX : audioO
         audio.onended = function () {
             clearInterval(timer);
             setTimeout(refresh, 1000);
@@ -89,7 +85,7 @@ View.prototype.dance = function (win)
 
         // dance
         timer = setInterval(function () {
-            me.drawWin(win, fi, centers);
+            view.drawWin(win, fi, centers);
             fi += dfi;
         }, 50);
 

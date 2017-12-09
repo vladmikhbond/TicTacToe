@@ -64,6 +64,7 @@ Model.prototype.whoWin = function()
 
     for (var i = 0; i < 8; i++) {
         var a = m[i][0], b = m[i][1], c = m[i][2];
+        m[i].who = f[c]
         if (f[a] == f[b] && f[b] == f[c] && (f[c] == 'O' || f[c] == 'X')) 
             return m[i];
     }
