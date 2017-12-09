@@ -78,10 +78,15 @@ View.prototype.dance = function (win)
         //  play music
         var audio = win.who == 'X' ? audioX : audioO
         audio.onended = function () {
-            clearInterval(timer);
-            setTimeout(refresh, 1000);
+          clearInterval(timer);
+          setTimeout(refresh, 1000);
         };
-        audio.play();
+
+        audio.play().then(() => {
+        }).catch((error) => {
+            setTimeout(function(){
+                clearInterval(timer); setTimeout(refresh, 1000);}, 3000);
+        });
 
         // dance
         timer = setInterval(function () {
